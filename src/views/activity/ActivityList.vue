@@ -8,6 +8,7 @@
         </div>
 
         <DataTable v-if="activities.length" :value="activities" class="data-table">
+            <Column field="name" header="Nome" class="column-header" />
             <Column field="description" header="Descrição" class="column-header" />
 
             <Column field="status" header="Status" class="column-header">

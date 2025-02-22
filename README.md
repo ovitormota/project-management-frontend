@@ -1,33 +1,37 @@
-# project-management-frontend
+# Project Management
 
-This template should help get you started developing with Vue 3 in Vite.
+# Frontend - Vue.js Application
 
-## Recommended IDE Setup
+## Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- Vue CLI
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Getting Started
 
-## Type Support for `.vue` Imports in TS
+### 1. Clone the repository
+```bash
+git clone https://github.com/ovitormota/project-management-frontend.git
+cd project-management-frontend
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+### 2. Install dependencies
+```bash
 npm install
+# or using yarn
+yarn install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+### 4. Run development server
+```bash
 npm run dev
+# or using yarn
+yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+The application will be available at `http://localhost:5173`
 
-```sh
-npm run build
-```
+
+## Available Scripts
+- `npm run dev` - Runs development server
+- `npm run test` - Run unit tests

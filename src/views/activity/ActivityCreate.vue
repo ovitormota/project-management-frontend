@@ -5,6 +5,12 @@
 
             <form @submit.prevent="addActivity" class="form">
                 <div class="input-group">
+                    <label for="name">Nome</label>
+                    <InputText id="name" v-model="newActivity.name" placeholder="Digite o nome" class="full-width"
+                        required />
+                </div>
+
+                <div class="input-group">
                     <label for="description">Descrição</label>
                     <InputText id="description" v-model="newActivity.description" placeholder="Digite a descrição"
                         class="full-width" required />
@@ -45,9 +51,9 @@
 </template>
 
 <script lang="ts">
+import { Status, StatusLabels, type Activity, type Project } from "@/interfaces/Types";
 import ActivityServices from "@/services/activity/ActivityServices";
 import ProjectServices from "@/services/projects/ProjectServices";
-import { Status, StatusLabels, type Activity, type Project } from "@/interfaces/Types";
 import { Dropdown } from "primevue";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
@@ -62,6 +68,7 @@ export default defineComponent({
         const toast = useToast();
         const router = useRouter();
         const newActivity = ref<Activity>({
+            name: "",
             description: "",
             status: "",
             startDate: "",

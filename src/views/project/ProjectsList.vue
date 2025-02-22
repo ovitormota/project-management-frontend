@@ -10,7 +10,7 @@
         <DataTable v-if="projects.length" :value="projects" class="data-table" :expandedRows="expandedRows"
             @rowToggle="onRowToggle">
             <Column expander style="width: 3rem" />
-            <Column field="name" header="Nome" class="column-header" />
+            <Column field="name" header="Cliente" class="column-header" />
             <Column field="description" header="Descrição" class="column-header" />
             <Column field="status" header="Status" class="column-header">
                 <template #body="slotProps">

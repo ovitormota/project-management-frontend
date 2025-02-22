@@ -1,5 +1,6 @@
 export interface Activity {
   id?: number;
+  name: string;
   description: string;
   status: string;
   startDate: string;
