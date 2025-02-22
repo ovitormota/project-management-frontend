@@ -1,35 +1,52 @@
 <template>
     <Menubar :model="menuItems" class="navbar p-4 shadow-xl">
+        <template #end>
+            <div class="flex align-items-center gap-2">
+                <Button :label="itemLogout[0].label" :icon="itemLogout[0].icon" class="p-button-text p-button-plain"
+                    @click="itemLogout[0].command" />
+            </div>
+        </template>
     </Menubar>
 </template>
 
 <script lang="ts">
+import { setAuth } from "@/store/Auth";
+import Button from "primevue/button";
 import Menubar from "primevue/menubar";
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
     name: "Navbar",
-    components: { Menubar },
+    components: { Menubar, Button },
     setup() {
         const router = useRouter();
+
+        const logout = () => {
+            localStorage.removeItem('authToken');
+            setAuth(false);
+            router.push("/login");
+        };
+
+        const itemLogout = ref([
+            { label: "Sair", icon: "pi pi-sign-out", command: logout }
+        ]);
 
         const items = ref([
             { label: "Início", to: "/", icon: "pi pi-home" },
             { label: "Clientes", to: "/clients", icon: "pi pi-users" },
             { label: "Projetos", to: "/projects", icon: "pi pi-briefcase" },
             { label: "Atividades", to: "/activities", icon: "pi pi-list" },
+            { label: "Usuários", to: "/users", icon: "pi pi-users" }
         ]);
 
         const menuItems = items.value.map(item => ({
             label: item.label,
             icon: item.icon,
-            command: () => {
-                router.push(item.to);
-            }
+            command: () => router.push(item.to)
         }));
 
-        return { menuItems };
+        return { menuItems, itemLogout };
     },
 });
 </script>

@@ -1,11 +1,11 @@
+import axiosInstance from "@/config/AxiosConfig";
 import type { Activity } from "@/interfaces/Types";
-import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/activities";
+const API_URL = "/activities";
 
 const getActivities = async (): Promise<Activity[]> => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await axiosInstance.get(API_URL);
     return response.data;
   } catch (error) {
     console.error("Error fetching activities:", error);
@@ -15,7 +15,7 @@ const getActivities = async (): Promise<Activity[]> => {
 
 const getActivityById = async (id: number | string): Promise<Activity> => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const response = await axiosInstance.get(`${API_URL}/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching activity:", error);
@@ -25,7 +25,7 @@ const getActivityById = async (id: number | string): Promise<Activity> => {
 
 const createActivity = async (activity: Activity): Promise<void> => {
   try {
-    await axios.post(API_URL, activity);
+    await axiosInstance.post(API_URL, activity);
   } catch (error) {
     console.error("Error creating activity:", error);
     throw error;
@@ -34,7 +34,7 @@ const createActivity = async (activity: Activity): Promise<void> => {
 
 const updateActivity = async (activity: Activity): Promise<void> => {
   try {
-    await axios.put(`${API_URL}/${activity.id}`, activity);
+    await axiosInstance.put(`${API_URL}/${activity.id}`, activity);
   } catch (error) {
     console.error("Error updating activity:", error);
     throw error;
@@ -43,7 +43,7 @@ const updateActivity = async (activity: Activity): Promise<void> => {
 
 const deleteActivity = async (id: number): Promise<void> => {
   try {
-    await axios.delete(`${API_URL}/${id}`);
+    await axiosInstance.delete(`${API_URL}/${id}`);
   } catch (error) {
     console.error("Error deleting activity:", error);
     throw error;

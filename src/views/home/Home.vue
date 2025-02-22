@@ -8,8 +8,10 @@
                     :class="getCardClass(status)">
                     <template #content>
                         <div class="card-content">
-                            <i :class="getIconClass(status)" class="indicator-icon"></i>
-                            <p class="status-title">{{ translateKey(status) }}</p>
+                            <div class="card-content-status">
+                                <i :class="getIconClass(status)" class="indicator-icon"></i>
+                                <p class="status-title">{{ translateKey(status) }}</p>
+                            </div>
                             <p class="status-count">{{ count }}</p>
                         </div>
                     </template>
@@ -25,8 +27,10 @@
                     :class="getCardClass(status)">
                     <template #content>
                         <div class="card-content">
-                            <i :class="getIconClass(status)" class="indicator-icon"></i>
-                            <p class="status-title">{{ translateKey(status) }}</p>
+                            <div class="card-content-status">
+                                <i :class="getIconClass(status)" class="indicator-icon"></i>
+                                <p class="status-title">{{ translateKey(status) }}</p>
+                            </div>
                             <p class="status-count">{{ count }}</p>
                         </div>
                     </template>
@@ -109,7 +113,8 @@ export default defineComponent({
 }
 
 .section-title {
-    font-size: 1.5rem;
+    color: #666;
+    font-size: 1.3rem;
     margin-bottom: 10px;
     text-align: left;
 
@@ -122,55 +127,61 @@ export default defineComponent({
 .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(198px, 1fr));
-    gap: 18px;
+    gap: 40px;
     justify-content: center;
     align-items: stretch;
 }
 
+.card-content-status {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .card-content {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 
 .indicator-icon {
-    font-size: 2.2rem;
-    color: #555;
+    font-size: 1.5rem;
+    color: gray;
 }
 
 .status-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    color: #444;
+    color: gray;
 }
 
 .status-count {
-    font-size: 1.8rem;
+    margin: 0;
+    font-size: 2.8rem;
     font-weight: bold;
     color: #222;
 }
 
 .card-open {
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb22);
+    background: linear-gradient(135deg, #e3f2fd99, #bbdefb0a);
     border-left: 5px solid #3498db;
 }
 
 .card-in-progress {
-    background: linear-gradient(135deg, #fff3e0, #ffcc801d);
+    background: linear-gradient(135deg, #fff3e07d, #ffcc800b);
     border-left: 5px solid #f39c12;
 }
 
 .card-completed {
-    background: linear-gradient(135deg, #e8f5e9, #a5d6a71e);
+    background: linear-gradient(135deg, #e8f5e984, #a5d6a70b);
     border-left: 5px solid #4CAF50;
 }
 
 .card-pending {
-    background: linear-gradient(135deg, #ffebee, #ef9a9a1c);
+    background: linear-gradient(135deg, #ffebee85, #ef9a9a07);
     border-left: 5px solid #e74c3c;
 }
 
-/* Responsividade */
 @media (max-width: 600px) {
     .cards-container {
         grid-template-columns: 1fr;

@@ -39,7 +39,6 @@ export const StatusLabels: Record<Status, string> = {
   [Status.PENDING]: "Pendente",
 };
 
-
 export interface StatusCounts {
   IN_PROGRESS: number;
   COMPLETED: number;
@@ -52,4 +51,16 @@ export interface DashboardIndicators {
   projectStatusCounts: StatusCounts;
 }
 
+export interface User {
+  id?: number;
+  username: string;
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
+}
 
+export enum Role {
+  ADMIN = "ADMIN",
+}

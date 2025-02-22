@@ -2,7 +2,6 @@
     <div class="container">
         <div class="header">
             <h1 class="title">Clientes</h1>
-
             <router-link to="/clients/create">
                 <Button label="Adicionar novo cliente" icon="pi pi-plus" class="add-client-btn" />
             </router-link>
@@ -13,11 +12,9 @@
             <Column field="email" header="E-mail" class="column-header" />
             <Column field="phone" header="Celular" :body="phoneTemplate" class="column-header" />
 
-            <!-- Coluna de Ações -->
             <Column header="Ações" class="column-header actions-column">
                 <template #body="slotProps">
                     <div class="p-button-group">
-                        <!-- Botão de Excluir -->
                         <Button icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"
                             @click="deleteClient(slotProps.data.id)" />
                     </div>
@@ -54,7 +51,6 @@ export default defineComponent({
         const deleteClient = async (id: number) => {
             try {
                 await ClientServices.deleteClient(id);
-                // Recarregar a lista após excluir
                 await fetchClients();
 
                 toast.add({
@@ -87,9 +83,9 @@ export default defineComponent({
 <style scoped>
 .container {
     padding: 24px;
-    /* background-color: white; */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    background: white;
 }
 
 .header {
@@ -123,7 +119,6 @@ export default defineComponent({
 .column-header {
     font-weight: 500;
     color: #4a5568;
-    /* Medium gray */
 }
 
 .actions-column {
@@ -132,7 +127,6 @@ export default defineComponent({
 
 .no-clients-msg {
     color: #a0aec0;
-    /* Light gray */
     text-align: center;
     margin-top: 20px;
 }

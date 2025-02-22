@@ -1,28 +1,47 @@
 <template>
     <div class="container">
         <div class="form-card">
-            <h1 class="title">Adicionar novo cliente</h1>
+            <h1 class="title">Adicionar novo usuário</h1>
 
-            <form @submit.prevent="addClient" class="form">
+            <form @submit.prevent="addUser" class="form">
                 <div class="input-group">
-                    <label for="name">Nome</label>
-                    <InputText id="name" v-model="newClient.name" placeholder="Digite o nome" class="full-width"
-                        required />
-                </div>
-
-                <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <InputText id="email" v-model="newClient.email" type="email" placeholder="Digite o e-mail"
+                    <label for="username">Nome de usuário</label>
+                    <InputText id="username" v-model="newUser.username" placeholder="Digite o nome de usuário"
                         class="full-width" required />
                 </div>
 
                 <div class="input-group">
-                    <label for="phone">Celular (opcional)</label>
-                    <InputText id="phone" v-model="newClient.phone" placeholder="Digite o celular" class="full-width" />
+                    <label for="email">E-mail</label>
+                    <InputText id="email" v-model="newUser.email" type="email" placeholder="Digite o e-mail"
+                        class="full-width" required />
                 </div>
 
+
+
+                <div class="input-group">
+                    <label for="firstName">Nome</label>
+                    <InputText id="firstName" v-model="newUser.firstName" placeholder="Digite o nome"
+                        class="full-width" />
+                </div>
+
+                <div class="input-group">
+                    <label for="lastName">Sobrenome</label>
+                    <InputText id="lastName" v-model="newUser.lastName" placeholder="Digite o sobrenome"
+                        class="full-width" />
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <Password v-model="newUser.password" id="password" required toggleMask fluid class="full-width" />
+                </div>
+
+                <!-- <div class="input-group">
+                    <label for="role">Cargo</label>
+                    <InputText id="role" v-model="newUser.role" :value="Role.ADMIN" disabled class="full-width" />
+                </div> -->
+
                 <div class="buttons">
-                    <router-link to="/clients">
+                    <router-link to="/users">
                         <Button label="Voltar" severity="secondary" class="full-width" />
                     </router-link>
                     <Button type="submit" label="Salvar" class="full-width" />
@@ -33,55 +52,60 @@
 </template>
 
 <script lang="ts">
-import type { Client } from "@/interfaces/Types";
-import ClientServices from "@/services/clients/ClientServices";
+import { Role, type User } from "@/interfaces/Types";
+import AuthService from "@/services/auth/AuthService";
+import { Password } from "primevue";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { useToast } from "primevue/usetoast";
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 
-
 export default defineComponent({
-    name: "ClientsCreate",
-    components: { InputText, Button },
+    name: "UserCreate",
+    components: { InputText, Button, Password },
     setup() {
         const toast = useToast();
         const router = useRouter();
-        const newClient = ref<Client>({ name: "", email: "", phone: "" });
+        const newUser = ref<User>({
+            username: "",
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            role: Role.ADMIN
+        });
 
-        const addClient = async () => {
+        const addUser = async () => {
             try {
-                await ClientServices.createClient(newClient.value);
+                await AuthService.createUser(newUser.value);
 
                 toast.add({
                     severity: "success",
                     summary: "Sucesso",
-                    detail: "Cliente adicionado com sucesso!",
+                    detail: "Usuário adicionado com sucesso!",
                     life: 3000,
                 });
 
-                router.push("/clients");
+                router.push("/users");
             } catch (error) {
-
                 toast.add({
                     severity: "error",
                     summary: "Erro",
-                    detail: "Ocorreu um erro ao adicionar o cliente.",
+                    detail: "Ocorreu um erro ao adicionar o usuário.",
                     life: 3000,
                 });
 
-                console.error("Error adding client:", error);
+                console.error("Error adding user:", error);
             }
         };
 
-        return { newClient, addClient };
+        return { newUser, addUser, Role };
     },
 });
 </script>
 
 <style scoped>
-/* Centralização da tela */
 .container {
     display: flex;
     justify-content: center;
